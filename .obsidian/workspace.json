@@ -22,7 +22,7 @@
               "type": "markdown",
               "state": {
                 "file": "docs/SEU-Project R：在开始之前.md",
-                "mode": "source",
+                "mode": "preview",
                 "source": false
               }
             }
@@ -157,6 +157,7 @@
   },
   "active": "bebf3e05d896ac7d",
   "lastOpenFiles": [
+    "README.md",
     "Pasted image 20231129214751.png",
     "docs",
     "docs/SEU-Project R：在开始之前.md",
