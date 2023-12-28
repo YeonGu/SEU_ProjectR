@@ -1,0 +1,165 @@
+{
+  "main": {
+    "id": "ee412e5e0b5d0469",
+    "type": "split",
+    "children": [
+      {
+        "id": "ef3ff654c340fd77",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "16d8a95b8f0a502c",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {}
+            }
+          },
+          {
+            "id": "bebf3e05d896ac7d",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "docs/SEU-Project R：在开始之前.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          }
+        ],
+        "currentTab": 1
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "cbd73b15c411210c",
+    "type": "split",
+    "children": [
+      {
+        "id": "187d82898f7e4fe0",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "2fc827913341923c",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "cdb2693911495545",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "c40a3221879bc330",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "226622af5e34c839",
+    "type": "split",
+    "children": [
+      {
+        "id": "79958fbf7c17f4d1",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "ecba8fd7447bb421",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "docs/SEU-Project R：在开始之前.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "96a2450183503a93",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "docs/SEU-Project R：在开始之前.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "cdeb424f3f0d96ea",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              }
+            }
+          },
+          {
+            "id": "3dbcb31392c260d8",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "docs/SEU-Project R：在开始之前.md"
+              }
+            }
+          }
+        ],
+        "currentTab": 3
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:打开快速切换": false,
+      "graph:查看关系图谱": false,
+      "canvas:新建白板": false,
+      "daily-notes:打开/创建今天的日记": false,
+      "templates:插入模板": false,
+      "command-palette:打开命令面板": false
+    }
+  },
+  "active": "bebf3e05d896ac7d",
+  "lastOpenFiles": [
+    "Pasted image 20231129214751.png",
+    "docs",
+    "docs/SEU-Project R：在开始之前.md",
+    "docs/C"
+  ]
+}

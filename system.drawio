@@ -1,0 +1,55 @@
+<mxfile host="Electron" modified="2023-11-14T13:47:50.752Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/21.5.1 Chrome/112.0.5615.204 Electron/24.6.0 Safari/537.36" etag="fU71kRa-cQqN89PGJSvq" version="21.5.1" type="device">
+  <diagram name="第 1 页" id="tG3To_huA9VbUY_nMokD">
+    <mxGraphModel dx="1154" dy="577" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="WIM5rKc_bnR-lCOKDaf--17" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="WIM5rKc_bnR-lCOKDaf--1" target="WIM5rKc_bnR-lCOKDaf--3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="WIM5rKc_bnR-lCOKDaf--18" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="WIM5rKc_bnR-lCOKDaf--1" target="WIM5rKc_bnR-lCOKDaf--4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="WIM5rKc_bnR-lCOKDaf--19" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="WIM5rKc_bnR-lCOKDaf--1" target="WIM5rKc_bnR-lCOKDaf--15">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="WIM5rKc_bnR-lCOKDaf--20" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="WIM5rKc_bnR-lCOKDaf--1" target="WIM5rKc_bnR-lCOKDaf--2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="WIM5rKc_bnR-lCOKDaf--1" value="SEU Project-R" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
+          <mxGeometry x="420" y="350" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="WIM5rKc_bnR-lCOKDaf--11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="WIM5rKc_bnR-lCOKDaf--2" target="WIM5rKc_bnR-lCOKDaf--6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="WIM5rKc_bnR-lCOKDaf--13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="WIM5rKc_bnR-lCOKDaf--2" target="WIM5rKc_bnR-lCOKDaf--5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="WIM5rKc_bnR-lCOKDaf--14" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="WIM5rKc_bnR-lCOKDaf--2" target="WIM5rKc_bnR-lCOKDaf--8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="WIM5rKc_bnR-lCOKDaf--2" value="基础技能培训" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="90" y="440" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="WIM5rKc_bnR-lCOKDaf--3" value="嵌入式培训" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="310" y="440" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="WIM5rKc_bnR-lCOKDaf--4" value="PCB设计&lt;br&gt;与“如何学习设计”" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="540" y="440" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="WIM5rKc_bnR-lCOKDaf--5" value="C语言编程" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="190" y="610" width="120" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="WIM5rKc_bnR-lCOKDaf--6" value="基础工具和技能&lt;br&gt;gcc, make,&lt;br&gt;vscode, markdown,&lt;br&gt;manual..." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="190" y="520" width="120" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="WIM5rKc_bnR-lCOKDaf--8" value="计算机系统基础" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="190" y="700" width="120" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="WIM5rKc_bnR-lCOKDaf--15" value="..." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="760" y="440" width="120" height="60" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
