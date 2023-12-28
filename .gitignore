@@ -1,2 +1,4 @@
-
+.vitepress/cache/*
+node_modules
 .obsidian/*.json
+pnpm-lock.yaml
