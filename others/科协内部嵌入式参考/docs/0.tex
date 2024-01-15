@@ -1,0 +1,147 @@
+我在大一学习嵌入式开发的过程中曾经无数次陷入迷茫. 网上的资料多而杂, 要么是花费了太多时间在这个阶段不必要的细节, 要么是太过简略以至于完全不明所以. 另一个痛苦的来源其实是你校的计算机课程教学. 几乎可以暴论, 嵌入式开发学习的上限完全取决于\textbf{对计算机系统的认识程度}; 我在大一留下的诸多疑问一直到我学习了\href{https://nju-projectn.github.io/ics-pa-gitbook/ics2023/index.html}{\textbf{南京大学计算机系统实验}}课程之后才得到解答.
+
+所以我决定做一份学习资料(不如说更像是实验导引, 就像是国外学校EECS课程常有的Lab). 在这份文档中, 我会尽量做到\textbf{只讲述当前有必要的细节}, 应当交给视频去讲明白的就会交给视频去做; 应当由你自己RTFM, RTFSC(这两个缩写是什么意思? 马上就会告诉你了)弄懂的就交由你自己去慢慢理解.
+
+\begin{definition}
+	本文档目前的版本目前由科协内部使用(当然你分享出去了大家也不会说什么).
+
+	试用的一个重要目的是, 希望能收集大家在自由探索过程中真实遇到的困惑和改进建议, 这些建议会在此后 SEU-Project R 项目讲义的编写中发挥重要作用.
+\end{definition}
+
+\begin{theorem}
+	本文档采用\href{https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans}{CC BY-NC-SA 4.0 DEED}方式公开.
+
+	\textit{Yuhang Gu, Southeast University}
+
+\end{theorem}
+\begin{definition}
+	"我们都是活生生的人, 从小就被不由自主地教导用最小的付出获得最大的得到, 经常会忘记我们究竟要的是什么. 我承认我完美主义, 但我想每个人心中都有那一份求知的渴望和对真理的向往, "大学"的灵魂也就在于超越世俗, 超越时代的纯真和理想 -- 我们不是要讨好企业的毕业生, 而是要寻找改变世界的力量."
+
+	--- jyy
+
+	"教育除了知识的记忆之外, 更本质的是能力的训练, 即所谓的training. 而但凡training就必须克服一定的难度, 否则你就是在做重复劳动, 能力也不会有改变. 如果遇到难度就选择退缩, 或者让别人来替你克服本该由你自己克服的难度, 等于是自动放弃了获得training的机会, 而这其实是大学专业教育最宝贵的部分."
+
+	--- etone
+
+	计算机的所有东西都是人做出来的，别人能想得出来的，我也一定能想得出来，在计算机里头，没有任何黑魔法，所有的东西，只不过是我现在不知道而已，总有一天，我会把所有的细节，所有的内部的东西全都搞明白的。
+
+	--- 翁恺
+\end{definition}
+
+\section{正确提问和解决问题}
+\subsection{如何求助}
+在碰到问题求助之前 --- 哦不, 在开始实验之旅之前, 请先简单阅读一下这两篇文章: \href{https://github.com/ryanhanwu/How-To-Ask-Questions-The-Smart-Way/blob/main/README-zh_CN.md}{提问的智慧}和\href{https://github.com/tangx/Stop-Ask-Questions-The-Stupid-Ways/blob/master/README.md}{别像弱智一样提问}.
+
+\begin{definition}
+	是的, 别再问"为什么板子上的灯亮起来了但是电脑检测不到"这种问题了 - 仔细检查一下你连接开发板用的是数据线还是电源线( ---它们之间有什么区别? )
+\end{definition}
+\begin{theorem}
+	一定要记住: 机器 (除非芯片烧了) 和编译器永远是对的; 未测试的代码一定是错的; 杜邦线很有可能是连错的; 时钟有可能是忘记开了的.
+
+	不可否认的是, 嵌入式开发的软硬件结合特性和底层性注定了错误调试的难度, 但错误一定不是不可排除的黑魔法. 你有万用表, 有调试器(在单片机开发时, 你同样可以通过gdb打断点, 看内存等), 已经足够排除90\% 的问题了. 剩下的交给玄学吧.
+\end{theorem}
+
+\subsection{用正确的手段解决问题}
+一个重要的任务是, 希望能在实验的过程中培养大家用正确的手段解决问题的能力. 具体的内容在此后的讲义中将会一再涉及.
+
+\section{C语言基础?}
+毫无疑问嵌入式开发的主力是C语言. 尽管需要强调\textbf{C++和C基本上是两种语言}, 但大家大一学的{C++}仍然足够帮你应付嵌入式开发的入门需要了. 然而C中有两件事物仍然值得强调:
+
+\begin{itemize}
+	\item 指针, 指针的本质, 数据类型的本质.
+	\item 结构体, 结构体的内存分布, 结构体指针, 结构体指针和各种其他事物的互转
+\end{itemize}
+
+在此, 非常推荐访问\href{https://wizardforcel.gitbooks.io/lcthw/content/}{\textbf{笨方法学C}}进行C语言的学习(同样会涉及一些命令行和编译器的使用小方法, 很实用). 推荐完成练习1-18, 31(调试器), 44(环形缓冲区)的学习.
+
+如果你没有太多时间的话, 也请一定要重看其\href{https://wizardforcel.gitbooks.io/lcthw/content/ex15.html}{\textbf{练习15: 可怕的指针}}和\href{https://wizardforcel.gitbooks.io/lcthw/content/ex16.html}{\textbf{练习16：结构体和指向它们的指针}}和\href{https://wizardforcel.gitbooks.io/lcthw/content/ex18.html}{\textbf{练习18：函数指针}}的内容. 不然对于之后的内容给你带来的,可能的心灵创伤.作者概不负责.
+
+\begin{definition}
+	一个有趣的问题: 能不能用C++写单片机程序?
+
+	答案是肯定的. 不过要完全理解这个过程还需要一些对编译过程的理解. 而且你不能直接在C里引用C++声明的函数 --- 为什么?
+
+	这个问题就交给两千年后的你来STFW解决吧.
+\end{definition}
+
+\section{实验方案}
+
+\Large {Part 1. 从零开始的单片机之旅} \normalsize
+
+\subsection{实验一: 点灯工程师}
+\begin{itemize}
+	\item 流水灯
+	\item 读取按键
+	\item RTFM(一)
+	\item 发生了什么?
+\end{itemize}
+
+\subsection{实验二: Hello World!}
+\begin{itemize}
+	\item UART和发送消息
+	\item printf在做什么?
+	\item 接受号令吧!
+\end{itemize}
+
+\subsection{实验三: 穿越时空的旅程}
+\begin{itemize}
+	\item 正片开始: 中断
+	\item 执行流的切换: 状态机的视角
+	\item GPIO中断和UART中断
+	\item 缓冲区, 消息队列
+\end{itemize}
+\vspace*{20pt}
+
+\Large {Part 2. 连结世界} \normalsize
+
+\subsection{实验四: IIC初见}
+\begin{itemize}
+	\item EEPROM读写
+	\item SCL与SDA: 了解协议
+	\item 从单片机到现代计算机系统: "外设"究竟是什么?
+	\item Hello World (二): 屏幕, 启动!
+\end{itemize}
+
+\subsection{实验五: One Last Kiss}
+\begin{itemize}
+	\item 尝试MPU6050
+	\item SD卡
+	\item One Last Kiss
+\end{itemize}
+
+\subsection{实验六: 跳动的方块}
+\begin{itemize}
+	\item 姿态解算
+	\item 对它使用线性代数吧!
+	\item 数学运算: 性能与空间的trade-off
+	\item * Kalman Filter
+\end{itemize}
+
+\vspace*{20pt}
+
+\Large {Part 3. 我逐渐开始理解一切} \normalsize
+
+\subsection{实验六: SPI和图形库}
+\begin{itemize}
+	\item SPI协议和屏幕驱动
+	\item 使用LVGL
+\end{itemize}
+
+\subsection{RTOS}
+
+
+\section{实验环境}
+
+\begin{itemize}
+	\item 操作系统: Windows / GNU/Linux
+	\item 编程语言: C语言
+	\item IDE环境: Keil / STM32-CubeIDE / CLion
+\end{itemize}
+
+\section{如何获得帮助}
+
+\section{其他说明}
+
+欢迎加入科协嵌入式培训教材编写组 / Project-R 文档编写和维护组.
+
+关于本讲义内容的问题和建议请联系gyh: 213221544@seu.edu.cn / 127941818 (QQ)

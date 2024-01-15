@@ -1,0 +1,21 @@
+\contentsline {chapter}{序}{ii}{chapter*.2}%
+\contentsline {section}{\numberline {0.1}正确提问和解决问题}{ii}{section.0.1}%
+\contentsline {subsection}{\numberline {0.1.1}如何求助}{ii}{subsection.0.1.1}%
+\contentsline {subsection}{\numberline {0.1.2}用正确的手段解决问题}{iii}{subsection.0.1.2}%
+\contentsline {section}{\numberline {0.2}C语言基础?}{iii}{section.0.2}%
+\contentsline {section}{\numberline {0.3}实验方案}{iii}{section.0.3}%
+\contentsline {subsection}{\numberline {0.3.1}实验一: 点灯工程师}{iii}{subsection.0.3.1}%
+\contentsline {subsection}{\numberline {0.3.2}实验二: Hello World!}{iii}{subsection.0.3.2}%
+\contentsline {subsection}{\numberline {0.3.3}实验三: 穿越时空的旅程}{iv}{subsection.0.3.3}%
+\contentsline {subsection}{\numberline {0.3.4}实验四: IIC初见}{iv}{subsection.0.3.4}%
+\contentsline {subsection}{\numberline {0.3.5}实验五: One Last Kiss}{iv}{subsection.0.3.5}%
+\contentsline {subsection}{\numberline {0.3.6}实验六: 跳动的方块}{iv}{subsection.0.3.6}%
+\contentsline {subsection}{\numberline {0.3.7}实验六: SPI和图形库}{iv}{subsection.0.3.7}%
+\contentsline {subsection}{\numberline {0.3.8}RTOS}{iv}{subsection.0.3.8}%
+\contentsline {section}{\numberline {0.4}实验环境}{iv}{section.0.4}%
+\contentsline {section}{\numberline {0.5}如何获得帮助}{v}{section.0.5}%
+\contentsline {section}{\numberline {0.6}其他说明}{v}{section.0.6}%
+\contentsline {chapter}{\numberline {第 1{} 章}开始之前: 准备工作与相关注意事项}{1}{chapter.1}%
+\contentsline {section}{\numberline {1.1}准备工作}{1}{section.1.1}%
+\contentsline {section}{\numberline {1.2}开发环境配置}{1}{section.1.2}%
+\contentsline {section}{\numberline {1.3}开发板型号以及相关参考}{1}{section.1.3}%
