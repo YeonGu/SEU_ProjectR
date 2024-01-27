@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2023.12.8)  15 JAN 2024 21:35
+This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2023.12.8)  25 JAN 2024 14:06
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1601,47 +1601,47 @@ LaTeX Warning: Unused global option(s):
 (./嵌入式培训(科协用).aux)
 \openout1 = `嵌入式培训(科协用).aux'.
 
-LaTeX Font Info:    Checking defaults for OML/ntxmi/m/it on input line 15.
-LaTeX Font Info:    Trying to load font information for OML+ntxmi on input line 15.
+LaTeX Font Info:    Checking defaults for OML/ntxmi/m/it on input line 16.
+LaTeX Font Info:    Trying to load font information for OML+ntxmi on input line 16.
  (e:/1 Software/texlive/2023/texmf-dist/tex/latex/newtx/omlntxmi.fd
 File: omlntxmi.fd 2015/08/25 Fontinst v1.933 font definitions for OML/ntxmi.
 )
-LaTeX Font Info:    ... okay on input line 15.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
-LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
-LaTeX Font Info:    Checking defaults for U/ntxexa/m/n on input line 15.
-LaTeX Font Info:    Trying to load font information for U+ntxexa on input line 15.
+LaTeX Font Info:    ... okay on input line 16.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 16.
+LaTeX Font Info:    ... okay on input line 16.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 16.
+LaTeX Font Info:    ... okay on input line 16.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 16.
+LaTeX Font Info:    ... okay on input line 16.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 16.
+LaTeX Font Info:    ... okay on input line 16.
+LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 16.
+LaTeX Font Info:    ... okay on input line 16.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 16.
+LaTeX Font Info:    ... okay on input line 16.
+LaTeX Font Info:    Checking defaults for U/ntxexa/m/n on input line 16.
+LaTeX Font Info:    Trying to load font information for U+ntxexa on input line 16.
  (e:/1 Software/texlive/2023/texmf-dist/tex/latex/newtx/untxexa.fd
 File: untxexa.fd 2012/04/16 Fontinst v1.933 font definitions for U/ntxexa.
 )
-LaTeX Font Info:    ... okay on input line 15.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
-LaTeX Font Info:    Checking defaults for LMS/ntxsy/m/n on input line 15.
-LaTeX Font Info:    Trying to load font information for LMS+ntxsy on input line 15.
+LaTeX Font Info:    ... okay on input line 16.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 16.
+LaTeX Font Info:    ... okay on input line 16.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 16.
+LaTeX Font Info:    ... okay on input line 16.
+LaTeX Font Info:    Checking defaults for LMS/ntxsy/m/n on input line 16.
+LaTeX Font Info:    Trying to load font information for LMS+ntxsy on input line 16.
  (e:/1 Software/texlive/2023/texmf-dist/tex/latex/newtx/lmsntxsy.fd
 File: lmsntxsy.fd 2016/07/02 Fontinst v1.933 font definitions for LMS/ntxsy.
 )
-LaTeX Font Info:    ... okay on input line 15.
-LaTeX Font Info:    Checking defaults for LMX/ntxexx/m/n on input line 15.
-LaTeX Font Info:    Trying to load font information for LMX+ntxexx on input line 15.
+LaTeX Font Info:    ... okay on input line 16.
+LaTeX Font Info:    Checking defaults for LMX/ntxexx/m/n on input line 16.
+LaTeX Font Info:    Trying to load font information for LMX+ntxexx on input line 16.
  (e:/1 Software/texlive/2023/texmf-dist/tex/latex/newtx/lmxntxexx.fd
 File: lmxntxexx.fd 2016/07/03 Fontinst v1.933 font definitions for LMX/ntxexx.
 )
-LaTeX Font Info:    ... okay on input line 15.
-Package hyperref Info: Link coloring ON on input line 15.
+LaTeX Font Info:    ... okay on input line 16.
+Package hyperref Info: Link coloring ON on input line 16.
  (./嵌入式培训(科协用).out) (./嵌入式培训(科协用).out)
 \@outlinefile=\write7
 \openout7 = `嵌入式培训(科协用).out'.
@@ -1681,8 +1681,8 @@ Package hyperref Info: Link coloring ON on input line 15.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-LaTeX Info: Command `\dddot' is already robust on input line 15.
-LaTeX Info: Command `\ddddot' is already robust on input line 15.
+LaTeX Info: Command `\dddot' is already robust on input line 16.
+LaTeX Info: Command `\ddddot' is already robust on input line 16.
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: listings package is loaded.
 Package caption Info: End \AtBeginDocument code.
@@ -1713,10 +1713,10 @@ Package biblatex Info: Trying to load bibliographic data...
 Package biblatex Info: ... file '嵌入式培训(科协用).bbl' not found.
 
 No file 嵌入式培训(科协用).bbl.
-Package biblatex Info: Reference section=0 on input line 15.
-Package biblatex Info: Reference segment=0 on input line 15.
+Package biblatex Info: Reference section=0 on input line 16.
+Package biblatex Info: Reference segment=0 on input line 16.
 \c@lstlisting=\count562
-Package hyperref Info: Option `pageanchor' set `false' on input line 16.
+Package hyperref Info: Option `pageanchor' set `false' on input line 17.
 *geometry* verbose mode - [ newgeometry ] result:
 * driver: xetex
 * paper: a4paper
@@ -1752,50 +1752,50 @@ Package hyperref Info: Option `pageanchor' set `false' on input line 16.
 File: example-image.pdf Graphic file (type pdf)
 <use example-image.pdf>
 LaTeX Font Info:    Font shape `TU/TeXGyreTermesX(0)/b/n' will be
-(Font)              scaled to size 10.0pt on input line 16.
+(Font)              scaled to size 10.0pt on input line 17.
 LaTeX Font Info:    Font shape `TU/TeXGyreTermesX(0)/b/n' will be
-(Font)              scaled to size 24.88pt on input line 16.
-LaTeX Font Info:    Trying to load font information for OT1+ntxtlf on input line 16.
+(Font)              scaled to size 24.88pt on input line 17.
+LaTeX Font Info:    Trying to load font information for OT1+ntxtlf on input line 17.
 (e:/1 Software/texlive/2023/texmf-dist/tex/latex/newtx/ot1ntxtlf.fd
 File: ot1ntxtlf.fd 2021/05/24 v1.0 font definition file for OT1/ntx/tlf
 )
-LaTeX Font Info:    Trying to load font information for U+ntxmia on input line 16.
+LaTeX Font Info:    Trying to load font information for U+ntxmia on input line 17.
  (e:/1 Software/texlive/2023/texmf-dist/tex/latex/newtx/untxmia.fd
 File: untxmia.fd 2018/04/14 Fontinst v1.933 font definitions for U/ntxmia.
 )
-LaTeX Font Info:    Trying to load font information for U+ntxsym on input line 16.
+LaTeX Font Info:    Trying to load font information for U+ntxsym on input line 17.
  (e:/1 Software/texlive/2023/texmf-dist/tex/latex/newtx/untxsym.fd
 File: untxsym.fd 2023/08/16 Fontinst v1.933 font definitions for U/ntxsym.
 )
-LaTeX Font Info:    Trying to load font information for U+ntxsyc on input line 16.
+LaTeX Font Info:    Trying to load font information for U+ntxsyc on input line 17.
  (e:/1 Software/texlive/2023/texmf-dist/tex/latex/newtx/untxsyc.fd
 File: untxsyc.fd 2012/04/12 Fontinst v1.933 font definitions for U/ntxsyc.
 )
-LaTeX Font Info:    Trying to load font information for U+esint on input line 16.
+LaTeX Font Info:    Trying to load font information for U+esint on input line 17.
  (e:/1 Software/texlive/2023/texmf-dist/tex/latex/esint/uesint.fd
 File: uesint.fd 
 )
-LaTeX Font Info:    Trying to load font information for U+rsfs on input line 16.
+LaTeX Font Info:    Trying to load font information for U+rsfs on input line 17.
  (e:/1 Software/texlive/2023/texmf-dist/tex/latex/jknapltx/ursfs.fd
 File: ursfs.fd 1998/03/24 rsfs font definition file (jk)
 )
-LaTeX Font Info:    Trying to load font information for U+msa on input line 16.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 17.
  (e:/1 Software/texlive/2023/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 16.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 17.
  (e:/1 Software/texlive/2023/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 LaTeX Font Info:    Font shape `TU/TeXGyreTermesX(0)/b/n' will be
-(Font)              scaled to size 14.4pt on input line 16.
+(Font)              scaled to size 14.4pt on input line 17.
  [1
 
 
 
 ]
 LaTeX Font Info:    Font shape `TU/TeXGyreTermesX(0)/b/n' will be
-(Font)              scaled to size 17.28pt on input line 19.
+(Font)              scaled to size 17.28pt on input line 20.
  (./嵌入式培训(科协用).toc)
 \tf@toc=\write8
 \openout8 = `嵌入式培训(科协用).toc'.
@@ -1816,29 +1816,48 @@ LaTeX Font Info:    Font shape `TU/TeXGyreTermesX(0)/m/n' will be
 (Font)              scaled to size 14.4pt on input line 69.
 LaTeX Font Info:    Font shape `TU/TeXGyreTermesX(0)/m/n' will be
 (Font)              scaled to size 9.0pt on input line 89.
- [3] [4]) [5]
+ [3] [4]) [5] (./docs/1.tex
 Chapter 1.
 [1
 
 
-] (./嵌入式培训(科协用).aux)
+]) (./docs/2.tex [2]
+Chapter 2.
+(e:/1 Software/texlive/2023/texmf-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2023/02/27 1.9 listings language file
+) (e:/1 Software/texlive/2023/texmf-dist/tex/latex/listings/lstmisc.sty
+File: lstmisc.sty 2023/02/27 1.9 (Carsten Heinz)
+)
+Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on input line 43.
+ [3
+
+]
+
+LaTeX Font Warning: Font shape `TU/FandolKai-Regular(0)/b/n' undefined
+(Font)              using `TU/FandolKai-Regular(0)/m/n' instead on input line 90.
+
+[4] [5]) [6] (./嵌入式培训(科协用).aux)
  ***********
 LaTeX2e <2023-11-01>
 L3 programming layer <2022/08/05>
  ***********
+
+
+LaTeX Font Warning: Some font shapes were not available, defaults substituted.
+
 Package rerunfilecheck Info: File `嵌入式培训(科协用).out' has not changed.
-(rerunfilecheck)             Checksum: 024DD2E4F39ACC50526A9896D904B358;1389.
+(rerunfilecheck)             Checksum: 80A5C617A6146EAEE048BCE1F23D7B52;2125.
 Package logreq Info: Writing requests to '嵌入式培训(科协用).run.xml'.
 \openout1 = `嵌入式培训(科协用).run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 47757 strings out of 474923
- 998109 string characters out of 5760120
- 1995504 words of memory out of 5000000
- 68934 multiletter control sequences out of 15000+600000
- 574811 words of font info for 120 fonts, out of 8000000 for 9000
+ 49396 strings out of 474923
+ 1020106 string characters out of 5760120
+ 2176320 words of memory out of 5000000
+ 70554 multiletter control sequences out of 15000+600000
+ 574859 words of font info for 126 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 103i,12n,136p,679b,1321s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 103i,12n,136p,679b,2206s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on 嵌入式培训(科协用).pdf (7 pages).
+Output written on 嵌入式培训(科协用).pdf (12 pages).

@@ -1,0 +1,194 @@
+\chapter{点灯工程师}
+
+点灯之于嵌入式开发的学习就如同Hello World之于编程的学习, 几乎是每位学习者迈出的第一步. 在这个过程中, 你将会掌握对MCU上最基本的外设 --- GPIO的相关操作, 延时函数的使用, 以及整个C代码工程的整体情况.
+
+\section{点亮你的LED}
+
+\subsection{创建工程}
+
+% Board selector (参考实验指导书)
+我们所使用的Nucleo-144开发板是ST官方推出的, 基于STM32F413ZH的开发板. 因此STM32CubeMX软件中可以直接选用这个板子, 数据库会帮我们初始化一些引脚信息而不用自己手动配置.
+
+关于创建工程, 初始化板子型号的步骤可以参见\textbf{STM32实验指导书}中\textbf{第四章 跑马灯实验}的内容.
+
+\subsection{GPIO}
+
+\subsection{编写代码}
+
+% 了解设置和定义宏的位置
+% board 和 mcu 两种配置
+
+请先观看视频: \href{https://www.bilibili.com/video/BV1s84y1h77Q/?share_source=copy_web&vd_source=b25682b699c98b1c6e3947c9b7b66a3a}{点亮第一颗小灯}和\href{https://www.bilibili.com/video/BV1Cd4y1L7kH/?spm_id_from=333.788&vd_source=f1ae41cbb2101ee1a2a77931d719f1be}{闪烁的小灯}. 完成视频里所演示的代码的内容. 注意: 由于型号和开发板不同, 创建工程的过程请先参考实验指导书第四章.
+
+\begin{definition}
+	视频中展示的点灯所用到的GPIO引脚和我们使用的开发板并不一致. 在使用相应API的时候示例如下:
+
+	\lstset{language=C}
+	\begin{lstlisting}
+		HAL_GPIO_WritePin ( LD1_GPIO_Port, LD1_Pin, GPIO_PIN_SET ); // 将LD1对应的GPIO设为高电平
+		HAL_GPIO_WritePin ( LD2_GPIO_Port, LD2_Pin, GPIO_PIN_SET ); // 将LD2对应的GPIO设为高电平
+	\end{lstlisting}
+
+\end{definition}
+
+% TODO: 注释的内容
+
+\section{RTFSC (1)}
+
+\subsection{引脚和宏的使用}
+% 注释
+让我们把目光首先放在LD1\_Pin这几个类似的定义上. 很明显, LD1\_GPIO\_Port, LD1\_Pin, GPIO\_PIN\_SET都不是本来就属于C的东西, 那么它们是如何出现的呢?
+
+使用IDE的代码跳转功能可以轻松地帮助我们解答这个疑问. 哦! 原来它们的奥妙在CubeMX为我们生成的源码里:
+\begin{lstlisting}{main.h}
+	// in main.h...
+	/* Private defines -----------------------------------------------------------*/
+	#define USER_Btn_Pin GPIO_PIN_13
+	#define USER_Btn_GPIO_Port GPIOC
+	#define LD1_Pin GPIO_PIN_0
+	#define LD1_GPIO_Port GPIOB
+	// ......
+\end{lstlisting}
+
+接着, main.c引用了main.h, 于是我们可以直接在代码里写LD1\_Pin; 在编译期间, 这些定义的宏会被自动展开成本应该有的样子.
+
+\begin{problem}
+如果你对\textbf{预编译指令, \#define, \#include} 这些概念仍不熟悉的话, 是时候STFW了解一下了.
+
+以及: \#include 的本质其实是"复制粘贴". 怎么理解这个概念?
+
+它将有助于你解释你可能经常遇到的undeclared identifier, multiple declaration 之类的问题, 以及为什么每一个头文件都需要有一个令人费解的\#ifndef...\#define...\#endif.
+\end{problem}
+\vspace{15pt}
+\hrule
+\vspace{10pt}
+通过C中的宏, 我们实现了一种软件的封装. 我们当然可以把之前的代码写成:
+\begin{lstlisting}
+	HAL_GPIO_WritePin ( GPIOB, GPIO_PIN_0, 1 ); // 将LD1对应的GPIO设为高电平
+	HAL_GPIO_WritePin ( GPIOB, GPIO_PIN_2, 1 ); // 将LD2对应的GPIO设为高电平
+\end{lstlisting}
+
+但这种写法很大程度上降低了代码可读性, 更重要的是破坏了\textbf{可维护性}: 如果在未来这个引脚被改变了, 这是否代表着我们未来需要一个一个改引脚?
+
+而我们的写法则没有这种顾虑: 只需要更改 \#define 的内容, 剩下的任务编译器会在启动编译时的预编译期间解决一切问题.
+
+\subsection{引脚的配置}
+
+接下来我们会在硬件, CubeMX, 代码三个层面理解引脚和配置. 阅读开发板原理图, 可以发现LD1被接到了PB0这个GPIO引脚.
+
+那么代码中呢? 在上一节, 我们已经看到了:
+\begin{lstlisting}
+	#define LD1_Pin GPIO_PIN_0
+	#define LD1_GPIO_Port GPIOB
+\end{lstlisting}
+
+我们定义的LD1对应的GPIO刚好是GPIOB端口的PB0! 同样地, 请你寻找开发板原理图上的 LD2, 3, 寻找它们对应的引脚和宏声明.
+
+那么CubeMX是如何知道这一点的呢? 别忘了我们生成项目的时候勾选了 "default initialize peripheral", 由于官方的开发板在数据库中已经有了LED端口的信息, 它们在一开始就已经被配置好了. 你可以打开CubeMX, 在Pinout\&configuration一栏中寻找到这几个GPIO, 看看它们是如何被定义好的.
+
+\begin{theorem}
+	了解了引脚的配置, 接下来请你\textbf{使用MCU selector} 而不是 Board selector 重新生成一个工程, 自己为LD0, 1, 2进行引脚的定义, 并点亮这三颗LED. 指定引脚的过程可以看 2.1.3 部分中的视频.
+\end{theorem}
+
+\section{流水灯}
+
+到目前为止, 你已经学会了基础的点灯, 以及结合视频完成了动态变换的LED效果. 接下来请你自己完成一个流水灯: 使LD1, LD2, LD3按顺序交替点亮.
+
+\subsection{copy-paste}
+
+到这一步, 估计你的代码已经变成了这样:
+\begin{lstlisting}
+	HAL_GPIO_WritePin ( LD1_GPIO_Port, LD1_Pin, GPIO_PIN_SET ); // 将LD1对应的GPIO设为高电平
+	HAL_GPIO_WritePin ( LD2_GPIO_Port, LD2_Pin, GPIO_PIN_RESET ); // 将LD2对应的GPIO设为低电平
+	HAL_GPIO_WritePin ( LD3_GPIO_Port, LD3_Pin, GPIO_PIN_RESET ); // 将LD3对应的GPIO设为低电平
+	HAL_Delay(500); // 延时, 点亮LD2
+	HAL_GPIO_WritePin ( LD1_GPIO_Port, LD1_Pin, GPIO_PIN_RESET ); // 将LD1对应的GPIO设为低电平
+	HAL_GPIO_WritePin ( LD2_GPIO_Port, LD2_Pin, GPIO_PIN_SET ); // 将LD2对应的GPIO设为高电平
+	HAL_GPIO_WritePin ( LD3_GPIO_Port, LD3_Pin, GPIO_PIN_RESET ); // 将LD3对应的GPIO设为低电平
+	// ......
+\end{lstlisting}
+
+--- 丑到家了, 对不对? 那有没有什么办法让我们要写的东西少一点, 代码好看一点呢?
+
+当然是有的 --- 那就是我们之前提到的\textbf{宏}.
+
+再加上一点点小技巧 --- (\textbf{宏拼接和宏参数}) --- 我们就可以把"点灯"的操作\textbf{封装}起来.
+\begin{lstlisting}
+	#define LTON(n) HAL_GPIO_WritePin ( LD##n##_GPIO_Port, LD##n##_Pin, GPIO_PIN_SET ) // 点亮LDn
+	#define LTOFF(n) HAL_GPIO_WritePin ( LD##n##_GPIO_Port, LD##n##_Pin, GPIO_PIN_RESET ) // 熄灭LDn
+\end{lstlisting}
+
+特别注意其中\#\#的\textbf{拼接宏}用法(如果难以理解, 可以STFW). 于是原本的代码就可以写成:
+\begin{lstlisting}
+	LDON(1);
+	LDOFF(2);
+	LDOFF(3);
+	HAL_Delay(500); // 延时, 点亮LD2
+	LDOFF(1);
+	LDON(2);
+	LDOFF(3);
+\end{lstlisting}
+
+好看很多了, 对吧? 不过每次点亮一个灯就要写三行疑似还是有点太臭了, 让我们在此基础上再套一层宏(使用\textbf{反斜杠可以定义多行的宏}):
+\begin{lstlisting}
+	#ONELT(n)     \      // 点亮LDn, 熄灭其他LED
+		LDOFF(1); \
+		LDOFF(2); \
+		LDOFF(3); \
+		LDON(n);
+\end{lstlisting}
+
+于是:
+\begin{lstlisting}
+	ONELT(1);
+	HAL_Delay(500);
+	ONELT(2);
+\end{lstlisting}
+
+\begin{theorem}
+	请用宏定义等方法重构自己的代码, 创造一个属于你的炫酷点灯程序吧!
+\end{theorem}
+
+\begin{problem}
+为什么要费尽心思设计这些宏? 请看本节的小标题: Copy-paste --- 指的就是本节一开始, 我们写出来的代码的样子.
+
+经过这一番代码层面的优化, 相信聪明的你已经get到了为什么Copy-paste行为是写代码的大忌, 以及我们有哪些规避写出Copy-paste代码的手段.
+
+当然, 解决copy-paste问题的方案不仅仅有宏, 更复杂的任务也可以交给函数去完成 --- 不过由于宏仅仅是文本展开, 而不涉及代码跳转, 毫无疑问它是不会造成多余的计算资源消耗的. (不过宏会导致最终编译的代码所需的空间更大; 但是相比起嵌入式开发中金贵的计算资源而言, 这点空间的使用大部分时候算不上什么)
+\end{problem}
+
+\begin{definition}
+	还有一种有趣的宏用法: 可变参数宏. 比如:
+	\begin{lstlisting}
+		#define CASE(n, ...) \
+		    case n:          \
+		        __VA_ARGS__; \
+		        break;
+	\end{lstlisting}
+	于是, 我们可以把switch写成这样:
+	\begin{lstlisting}
+        switch (state) {
+            CASE(0, ONELT(0));
+            CASE(3, ONELT(1));
+            CASE(4, ONELT(2));
+            default:
+                break;
+        }
+    \end{lstlisting}
+	你可以STFW, 来弄明白发生了什么; 或者还有一种好方法 --- 为什么不问问神奇的ChatGPT呢?
+\end{definition}
+\begin{definition}
+	复杂的宏也许会让人一头雾水. CLion之类的现代IDE可以给出宏展开的结果; 但是一旦宏复杂起来, 就连强大的IDE也无法告诉你它本来是什么样的, 还会影响它正常的代码提示和跳转. 在这种情况下应当如何理解复杂的宏?
+
+	想想看宏是如何被编译器所理解的 --- 它会在编译的第一步, 预处理阶段, 被编译器展开.
+
+	那么如果我们可以让编译器(如gcc)输出源代码预处理的结果, 不就可以弄明白发生了什么了吗?
+\end{definition}
+
+\section{RTFM}
+\subsection{GPIO: 外设, 时钟和基本情况}
+\subsection{GPIO: 寄存器控制 --- 外设即访存与抽象}
+
+\section{RTFSC (2)}
+
+% GPIO相关与外设操作
