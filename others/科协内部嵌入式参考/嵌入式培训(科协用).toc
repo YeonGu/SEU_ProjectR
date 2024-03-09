@@ -36,3 +36,24 @@
 \contentsline {subsection}{\numberline {2.4.1}GPIO: 外设, 时钟和基本情况}{6}{subsection.2.4.1}%
 \contentsline {subsection}{\numberline {2.4.2}GPIO: 寄存器控制 --- 外设即访存与抽象}{6}{subsection.2.4.2}%
 \contentsline {section}{\numberline {2.5}RTFSC (2)}{6}{section.2.5}%
+\contentsline {chapter}{\numberline {第 3{} 章}系统中断}{7}{chapter.3}%
+\contentsline {section}{\numberline {3.1}什么是中断？}{7}{section.3.1}%
+\contentsline {section}{\numberline {3.2}执行流的切换}{7}{section.3.2}%
+\contentsline {section}{\numberline {3.3}处理器去哪找中断服务例程？——中断向量表}{8}{section.3.3}%
+\contentsline {section}{\numberline {3.4}中断服务例程会做些什么？}{8}{section.3.4}%
+\contentsline {section}{\numberline {3.5}不一样的点灯方法——GPIO中断}{9}{section.3.5}%
+\contentsline {subsection}{\numberline {3.5.1}实验操作}{9}{subsection.3.5.1}%
+\contentsline {section}{\numberline {3.6}RTFSC(1)}{9}{section.3.6}%
+\contentsline {subsection}{\numberline {3.6.1}中断标志位}{9}{subsection.3.6.1}%
+\contentsline {subsection}{\numberline {3.6.2}关于检测中断信号的问题}{9}{subsection.3.6.2}%
+\contentsline {section}{\numberline {3.7}NVIC嵌套中断向量控制器}{10}{section.3.7}%
+\contentsline {subsection}{\numberline {3.7.1}中断优先级}{10}{subsection.3.7.1}%
+\contentsline {subsection}{\numberline {3.7.2}关于中断号}{11}{subsection.3.7.2}%
+\contentsline {section}{\numberline {3.8}让小灯定时闪烁——定时器中断}{12}{section.3.8}%
+\contentsline {subsection}{\numberline {3.8.1}定时器原理}{12}{subsection.3.8.1}%
+\contentsline {subsection}{\numberline {3.8.2}代码编写}{12}{subsection.3.8.2}%
+\contentsline {section}{\numberline {3.9}RTFSC(2)}{13}{section.3.9}%
+\contentsline {section}{\numberline {3.10}用键盘控制小灯——UART中断}{13}{section.3.10}%
+\contentsline {section}{\numberline {3.11}缓冲区与消息队列}{13}{section.3.11}%
+\contentsline {subsection}{\numberline {3.11.1}缓冲区}{13}{subsection.3.11.1}%
+\contentsline {subsection}{\numberline {3.11.2}消息队列}{14}{subsection.3.11.2}%
