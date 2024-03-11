@@ -1,3 +1,14 @@
 .vitepress/cache/*
 node_modules
 .obsidian/*.json
+
+
+# for latex buffers
+*.aux
+*.bcf
+*.log
+*.out
+*.pdf
+*.run.xml
+*.synctex.gz
+*.toc
