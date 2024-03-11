@@ -13,6 +13,12 @@
 
 \subsection{GPIO}
 
+\begin{definition}
+	A general-purpose input/output (GPIO) is an uncommitted digital signal pin on an integrated circuit or electronic circuit (e.g. MCUs/MPUs) board which may be used as an input or output, or both, and is controllable by software.
+
+	--- Wikipedia
+\end{definition}
+
 \subsection{编写代码}
 
 % 了解设置和定义宏的位置
@@ -186,9 +192,143 @@
 \end{definition}
 
 \section{RTFM}
+刚才我们已经熟悉了如何使用代码操作GPIO. GPIO是MCU上最基本和重要的外设, 操作输出的电平, 从而控制设备状态, 传输数字信息.
+
+因此, 接下来的内容会继续深入GPIO的内容, 不仅仅是为了熟悉这个外设的使用, 也是希望能给大家讲解一种MCU的外设工作的范式, 以及最重要的 --- 手册的阅读和用正确的方法解决问题.
+
+
 \subsection{GPIO: 外设, 时钟和基本情况}
-\subsection{GPIO: 寄存器控制 --- 外设即访存与抽象}
+
+\subsubsection{GPIO}
+了解单片机上外设的基本情况最好的资料就是官方的\textbf{参考手册 (Reference manual)}. 对于一个MCU, 一般会有\textbf{数据手册 Datasheet}和\textbf{参考手册 Reference manual}两种较为重要的官方参考. 前者一般说明了MCU的电气特性, 封装规格等等物理信息; 后者则更像是使用人员的参考手册, 详细说明了MCU各个外设的使用情况和控制方式等, 用于编程参考.
+
+接下来就让我们尝试阅读\textbf{参考手册}, 了解单片机上GPIO的基本情况吧.
+
+\begin{theorem}{RTFM}
+	打开stm32f413的参考手册(官网下载或是用群里发的), 尝试:
+	\begin{enumerate}
+		\item 找到和GPIO有关的内容.
+		\item 控制GPIO的寄存器都有哪些? 它们都有什么样的用途? (关于"寄存器"和"控制", 之后的内容会进一步阐释)
+		\item GPIO都有一些什么特性? 它们大致都是什么意思?
+		\item GPIO都有什么样的功能?
+		\item 目前我们所用到的GPIO输出模式仅有"推挽"输出(Push-pull), 然而手册中还提到了许多其他的模式, 尝试搜索一下, 理解它们是什么意思. (也可以参考视频: \href{https://www.bilibili.com/video/BV1D84y1c7GV/?share_source=copy_web&vd_source=b25682b699c98b1c6e3947c9b7b66a3a}{【推挽, 开漏, 高阻, 这都是谁想出来的词??\ 】 }) (你同样能在手册中看到描述基本结构的电路图, 大二的同学应当能理解大部分了. 你可以注意到其中推挽的部分 --- 这不就是我们数电课上学过的CMOS结构嘛!)
+	\end{enumerate}
+\end{theorem}
+
+\subsubsection{外设}
+让我们介绍一下外设的概念.
+\begin{definition}
+	A peripheral device, or simply peripheral, is an auxiliary hardware device used to transfer information into and out of a computer.
+
+	The term peripheral device refers to all hardware components that are attached to a computer and are controlled by the computer system, but they are not the core components of the computer.
+
+	--- Wikipedia
+\end{definition}
+
+也就是说, 外设是这样一种计算机系统的组成部分:
+\begin{itemize}
+	\item 地位: 依附于计算机, 但不是core(处理器核心)的一部分.
+	\item 控制手段: 它可以被计算机系统所控制.
+	\item 用途: 输入/输出信息.
+	\item 物理特性: 挂载于计算机总线(这个之后会进行解释).
+\end{itemize}
+
+因此, GPIO就是一种外设: 它被计算机所控制, 用来输出/输入电平信息.
+
+那么, MCU是如何操控GPIO外设的呢?
+
+
+
+\subsection{GPIO: 寄存器控制 --- 外设即访存, 与计算机系统的抽象}
+
+请先阅读本文章的第一节"输入输出"中的内容: \href{https://nju-projectn.github.io/ics-pa-gitbook/ics2023/2.5.html}{设备与输入输出}, 理解计算机系统中"控制设备"意味着什么.
+
+于是你可以理解了: 对于计算机系统而言, \textbf{外设的控制即访存}. 详细一点地说, 控制一个外设的过程是这样的:
+\begin{itemize}
+	\item \textbf{CPU核心(C代码):} 向外设对应的地址读/写数据, 和普通的变量和指针的操作没有区别.
+	\item \textbf{总线}: CPU发出的向内存读/写数据的请求会经过\textbf{总线}处理, 发送到它实际映射到的位置(RAM运行内存, 程序存储器, 或是\textbf{外设}等). 对MCU上的外设 (如GPIO) 而言, 这些数据就会去到地址对应的\textbf{寄存器}, 并且读取/更改寄存器中的数据.
+	\item \textbf{外设模块}: 这些寄存器中的数据便是控制外设的根据. 寄存器中的每一个bit都被赋予了特定的意义, 外设即会根据这些控制字进行工作.
+\end{itemize}
+
+\subsection{属于你的WritePin()}
+
+说到这里, 让我们做个有趣的任务: 实现属于自己的WritePin()吧. 请按照之前的开发板配置方法建立新工程, 此时三个GPIO灯的模式已经被配好(如果你对配置过程感兴趣, 可以RTFM看看GPIO端口配置寄存器相关的内容). 在这里我们只需要通过手操寄存器来实现单纯的点灯操作就可以了.
+
+\begin{definition}{寄存器在哪里?}
+	很快你便碰到了第一个问题. 之前我们说过, 外设即访存, 那直接用指针写一堆数据不就行了嘛 --- 不过我们连相关寄存器的地址和用处都不知道, 那怎么办呢?
+
+	别忘了, 我们之前已经阅读过Reference Manual了, 这个问题的答案也同样可以在手册中找到.
+
+
+\end{definition}
+
+\begin{theorem}{寄存器的定义}
+	GPIO相关寄存器种类繁多. 不过Cubemx已经帮我们做好了初始化的工作, 我们只需要关注和输出电平控制有关的寄存器定义就可以了.
+
+\end{theorem}
+因此你阅读了手册目录, 发现目前需要关注的只有\textbf{GPIO 端口输出数据寄存器 (GPIOx\_ODR) (x = A...H)}和\textbf{GPIO 端口置1/复位寄存器 (GPIOx\_BSRR) (x = A...H)}两个寄存器 (其他寄存器都是做什么用的呢?).
+
+其中, ODR寄存器可以进行读写, 直接设置GPIOx的每一位引脚的输出电平(ODR中只有低16位有作用, 对应着一个GPIO端口上的16个引脚); BSRR寄存器则为只写, 在写BSRR时, 相应位对应的GPIO引脚输出直接进行置位/复位.
+
+\begin{theorem}
+	阅读手册中ODR和BSRR寄存器的描述, 理解这两个寄存器中每一位的功能定义.
+\end{theorem}
+\begin{definition}
+	BSRR的只写功能与我们惯常情况下所理解的"访存(读写内存)"有所不同(如果读BSRR, 只会获得0x0的值). 可以这么理解, \underline{访存是一种对外设的抽象}, 在读写外设的场景下, 它不仅是单纯的"读写内存", 而更像是对外设功能的一种抽象描述.
+\end{definition}
+\begin{definition}{寄存器地址在哪里?}
+	开发板上的LED都连接在GPIOB端口. 所以我们只需要找GPIOB\_ODR和GPIOB\_BSRR的地址就可以了.
+
+	首先我们需要找到GPIOB的\textbf{基地址}: 所有GPIOB的相关寄存器地址都会在这个基础上加上一个偏移量得到. 偏移量在寄存器的功能说明中已经给出.
+\end{definition}
+
+在手册的第二章2.2存储器组织架构一节, 你可以找到GPIOB的地址范围; 同时, 你也可以看到各种其他内存段的定义和声明, 有兴趣的话可以翻一翻里面有什么. 这里也有一些令人费解的新名词: AHB, APB等等, 它们都是总线的类型, 区别在于性能和功耗.
+
+相信到这里, 你已经差不多理解了"外设即访存"究竟是什么意思.
+
+\subsubsection{实现}
+接下来就来实现手操寄存器点灯的功能吧.
+
+\begin{lstlisting}
+#define GPIOB_BASE 0x ? ? ? ? ? ? ? ?         // To be implemented...
+#define GPIOx_ODR_OFFSET 0x ? ? ? ? ? ? ? ? ? // To be implemented...
+#define GET_ADDR(base, offset) (base + offset)
+#define GPIOB_REG(reg) volatile (uint32_t *)(GET_ADDR(GPIOB_BASE, GPIOx_##reg##_OFFSET))
+
+/**
+ * @brief GPIOB的PBn引脚置位
+ */
+void gpiob_set(uint8_t n) {
+  // To be implemented...
+}
+/**
+ * @brief GPIOB的PBn引脚复位
+ */
+void gpiob_reset(uint8_t n) {
+  // To be implemented...
+}
+/**
+ * @brief GPIOB的PBn引脚写电平, 如果val==0则复位, 否则置位
+ */
+void gpiob_write(uint8_t n, uint8_t val) {
+  // To be implemented...
+}
+\end{lstlisting}
+
+这里提一下位操作的方法: 如果想把某个数据的某一个bit置为0, 可以像这样做:
+\begin{lstlisting}
+	uint8_t target;
+	// 将target的第n位设置为0
+	target = (~(1 << n)) & target;
+\end{lstlisting}
+
+也就是说, 生成一个除了第n个bit以外都是1的数, 然后将它和target进行AND操作, 那么仅有的那个0就会将target的对应位设置为0. (0和任何数相与结果都为0)
+
+这样的一个"除了第n个bit以外都是1的数"叫做Mask(遮罩), 它说明了数据中的哪些位是为我们所需要的.
+
+同样地, 将某一位设置成1也可以用类似的手法, 通过和"1"进行的\textbf{按位或}操作完成.
+
 
 \section{RTFSC (2)}
-
+读一读HAL库的WritePin()和相关源码, 试着理解一下它是怎么实现的吧.
 % GPIO相关与外设操作

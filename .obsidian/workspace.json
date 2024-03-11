@@ -26,9 +26,21 @@
                 "source": false
               }
             }
+          },
+          {
+            "id": "eaf8f707a2a3303a",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "others/科协内部嵌入式参考/docs/初期调查/邵恺.md",
+                "mode": "source",
+                "source": false
+              }
+            }
           }
         ],
-        "currentTab": 1
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -94,7 +106,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "docs/SEU-Project R：在开始之前.md",
+                "file": "others/科协内部嵌入式参考/docs/初期调查/邵恺.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -111,7 +123,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "docs/SEU-Project R：在开始之前.md",
+                "file": "others/科协内部嵌入式参考/docs/初期调查/邵恺.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -134,7 +146,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "docs/SEU-Project R：在开始之前.md"
+                "file": "others/科协内部嵌入式参考/docs/初期调查/邵恺.md"
               }
             }
           }
@@ -155,12 +167,20 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "bebf3e05d896ac7d",
+  "active": "eaf8f707a2a3303a",
   "lastOpenFiles": [
+    "others/科协内部嵌入式参考/docs/初期调查/whr.md",
+    "others/科协内部嵌入式参考/docs/初期调查/肖思齐.md",
+    "others/科协内部嵌入式参考/docs/科协技术部2024嵌入式学习调查.md",
+    "others/科协内部嵌入式参考/docs/初期调查/肖思齐科协技术部2024嵌入式学习调查.md",
+    "others/科协内部嵌入式参考/docs/初期调查/why.md",
+    "others/科协内部嵌入式参考/docs/初期调查/科协技术部2024嵌入式学习调查.md",
+    "others/科协内部嵌入式参考/docs/初期调查",
+    "others/科协内部嵌入式参考/docs/新建文件夹",
+    "docs/SEU-Project R：在开始之前.md",
     "README.md",
     "Pasted image 20231129214751.png",
     "docs",
-    "docs/SEU-Project R：在开始之前.md",
     "docs/C"
   ]
 }
