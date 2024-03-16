@@ -41,7 +41,7 @@ Project R的名字来源于单词**Refactor（重构）**—— 通过逐步的�
    
 ## 这个项目涉及到哪些内容？
 
-![项目架构图](Project_Arch.png)
+![项目架构图](public/Project_Arch.png)
 
 ## 为什么要使用C而不是C++？
 
