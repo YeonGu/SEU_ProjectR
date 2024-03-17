@@ -23,6 +23,10 @@ export default defineConfig({
 				text: "准备工作与相关注意事项",
 				link: "/embedded/1"
 			},
+			{
+				text: "实验一 点灯工程师",
+				link: "/embedded/2GPIO"
+			},
 
 		],
 
