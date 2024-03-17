@@ -12,14 +12,20 @@ hero:
   actions:
     - theme: brand
       text: 嵌入式开发培训主页
-      link: /before-starting
+      link: /embedded/0
     - theme: alt
-      text: 相关链接
+      text: 相关链接与学习资源
       link: /relative-links
 
-# features:
-#   - title: Feature A
-#     details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
+features:
+  - title: Project-R 项目介绍
+    details: 在学习之旅开始之前...
+    link: before-starting
+    linkText: Project-R 项目概述与说明
+  - title: 其他学习资源
+    details: 自学资源推荐与相关链接
+    link: relative-links
+    linkText: 资源与链接
 #   - title: Feature B
 #     details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
 #   - title: Feature C

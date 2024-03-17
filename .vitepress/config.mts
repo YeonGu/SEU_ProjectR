@@ -16,14 +16,18 @@ export default defineConfig({
 
 		sidebar: [
 			{
-				text: "在开始之前",
-				link: "/before-starting"
-			}
+				text: "序: 在世界诞生之前",
+				link: "/embedded/0"
+			},
+			{
+				text: "准备工作与相关注意事项",
+				link: "/embedded/1"
+			},
 
 		],
 
 		socialLinks: [
-			{ icon: 'github', link: 'https://github.com/vuejs/vitepress' }
+			{ icon: 'github', link: 'https://github.com/YeonGu/SEU_ProjectR' }
 		]
 	}
 })
