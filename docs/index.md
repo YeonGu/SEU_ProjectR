@@ -3,7 +3,7 @@
 layout: home
 
 hero:
-  name: "SEU: Project_R Homepage"
+  name: "SEU-Project R Homepage"
   text: "东南大学电子科协\n培训项目"
   tagline: "寻找改变世界的力量"
 #   image:
