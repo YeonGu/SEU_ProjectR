@@ -117,7 +117,7 @@ initialize peripheral**",
 ------
 
 到目前为止, 你已经学会了基础的点灯, 以及结合视频完成了动态变换的LED效果.
-接下来请你自己完成一个流水灯: 使LD1, LD2, LD3按顺序交替点亮.
+接下来请你自己完成一个流水灯: LD1, LD2, LD3按顺序交替点亮, 中间间隔一段时间.
 
 ## copy-paste
 
@@ -126,26 +126,43 @@ initialize peripheral**",
 HAL_GPIO_WritePin ( LD1_GPIO_Port, LD1_Pin, GPIO_PIN_SET ); // 将LD1对应的GPIO设为高电平
 HAL_GPIO_WritePin ( LD2_GPIO_Port, LD2_Pin, GPIO_PIN_RESET ); // 将LD2对应的GPIO设为低电平
 HAL_GPIO_WritePin ( LD3_GPIO_Port, LD3_Pin, GPIO_PIN_RESET ); // 将LD3对应的GPIO设为低电平
+
 HAL_Delay(500); // 延时, 点亮LD2
+
 HAL_GPIO_WritePin ( LD1_GPIO_Port, LD1_Pin, GPIO_PIN_RESET ); // 将LD1对应的GPIO设为低电平
 HAL_GPIO_WritePin ( LD2_GPIO_Port, LD2_Pin, GPIO_PIN_SET ); // 将LD2对应的GPIO设为高电平
 HAL_GPIO_WritePin ( LD3_GPIO_Port, LD3_Pin, GPIO_PIN_RESET ); // 将LD3对应的GPIO设为低电平
 // ......
 ```
---- 丑到家了, 对不对? 那有没有什么办法让我们要写的东西少一点,
-代码好看一点呢?
+--- 冗长而难读, 实在是有点丑...
 
-当然是有的 --- 那就是我们之前提到的**宏**.
+那有没有什么办法让我们要写的东西少一点, 代码好看一点呢?
 
-C中的宏是无比强大的工具. 加上一点点小寄巧 --- (**宏拼接和宏参数**) ---
-我们就可以把\"点灯\"的操作**封装**起来.
+这样的工具当然是有的. C语言为我们提供了这样的工具 --- 那就是我们之前提到的**宏**.
+
+C中的宏是无比强大的工具. 这里我们会介绍一些小寄巧 --- (**宏拼接和宏参数**) ---
+从而把\"点灯\"的操作**封装**起来.
 
 ``` C
 #define LTON(n) HAL_GPIO_WritePin ( LD##n##_GPIO_Port, LD##n##_Pin, GPIO_PIN_SET ) // 点亮LDn
 #define LTOFF(n) HAL_GPIO_WritePin ( LD##n##_GPIO_Port, LD##n##_Pin, GPIO_PIN_RESET ) // 熄灭LDn
 ```
 
-特别注意其中`##`的**拼接宏**用法(如果难以理解, 可以STFW). 于是原本的代码就可以写成:
+特别注意其中`##`的**拼接宏**用法(如果难以理解, 可以STFW).
+:::tip 拼接宏
+拼接宏是一类特别有用的宏. 它在参数宏的基础上, 允许我们做更多的事情.
+
+例如
+```C
+LTON(1)
+```
+中的`n`是"1", 于是编译器就会在预处理的时候按照`LD##n##_GPIO_Port`的规则, 将`n`拼接到这个词语的中间. 预处理的结果即为:
+```C
+LD1_GPIO_Port
+```
+:::
+
+于是原本的代码就可以写成:
 
 ``` C
 LDON(1);
@@ -166,7 +183,7 @@ LDOFF(3);
     LDON(n);
 ```
 
-于是, 本来冗长的代码经过我们的封装变成了这个优雅的模样:
+最终我们得到了这样的流水灯代码:
 
 ```C
 ONELT(1);
@@ -178,7 +195,7 @@ ONELT(2);
 请用宏定义等方法重构自己的代码, 创造一个属于你的炫酷点灯程序吧!
 :::
 
-为什么要费尽心思设计这些宏? 请看本节的小标题: Copy-paste ---
+为什么要费尽心思设计这些宏? 请看本节的小标题: **Copy-paste** ---
 指的就是本节一开始, 我们写出来的代码的样子.
 
 经过这一番代码层面的优化,
@@ -199,7 +216,7 @@ ONELT(2);
         break;
 ```
 
-于是, 我们可以把switch语句写成这样:
+其中`...`的部分允许多个语句存在(中间用逗号隔开); 于是, 我们可以把switch语句写成这样:
 ```C
 switch (state) {
     CASE(0, ONELT(0));
@@ -214,7 +231,7 @@ switch (state) {
 你可以STFW, 来弄明白发生了什么; 或者还有一种好方法 ---
 **为什么不问问神奇的ChatGPT呢?**
 :::
-
+:::tip 理解宏展开
 复杂的宏也许会让人一头雾水. CLion之类的现代IDE可以给出宏展开的结果;
 但是一旦宏复杂起来, 就连强大的IDE也无法告诉你它本来是什么样的, 这还会影响它正常的代码提示和跳转. 在这种情况下应当如何理解复杂的宏?
 
@@ -222,6 +239,7 @@ switch (state) {
 被编译器展开.**
 
 那么如果我们可以**让编译器(如gcc)输出源代码预处理的结果**, 不就可以弄明白发生了什么了吗?
+:::
 
 RTFM
 ----
@@ -233,7 +251,7 @@ RTFM
 
 ## GPIO: 外设, 时钟和基本情况
 
-#### GPIO
+### GPIO
 
 了解单片机上外设的基本情况最好的资料就是官方的**参考手册 (Reference
 manual)**. 对于一个MCU, 一般会有**数据手册 Datasheet**和**参考手册
@@ -260,7 +278,7 @@ Reference manual**两种较为重要的官方参考. 前者一般说明了MCU的
     这不就是我们数电课上学过的CMOS结构嘛!)
 :::
 
-#### 外设
+### 外设
 
 接下来让我们介绍一下外设的概念.
 
@@ -284,7 +302,7 @@ they are not the core components of the computer.
 
 GPIO就是一种外设: 它被计算机所控制, 且用来输出/输入电平信息.
 
-那么, MCU是如何操控GPIO外设的呢?
+那么, MCU (或者当下所有的计算机系统) 是如何操控外设的呢?
 
 ## GPIO: 寄存器控制 --- 外设即访存, 与计算机系统的抽象
 
@@ -300,84 +318,131 @@ GPIO就是一种外设: 它被计算机所控制, 且用来输出/输入电平�
     发送到它实际映射到的位置(RAM运行内存, 程序存储器, 或是**外设**等).
     对MCU上的外设 (如GPIO) 而言, 这些数据就会去到地址对应的**寄存器**,
     并且读取/更改寄存器中的数据.
--   **外设模块**: 这些寄存器中的数据便是控制外设的根据. 寄存器中的**每一个bit都被赋予了特定的意义**, 外设即会根据这些控制字进行工作.
+-   **外设模块**: 这些寄存器中的数据便是控制外设的根据. 寄存器中的**每一个bit都被赋予了特定的意义**, 外设即会根据这些**控制字**进行工作.
+    - 例如STM32上的GPIO外设有一个叫做`GPIOx_ODR`的寄存器, 它总共有32位. 其中低16位与该GPIO组的0至15号引脚的输出电平一一对应.
+	- *e.g.* GPIOB_ODR中存储的值是`0x03`, 那么PB0和PB1的输出就是高电平(1), 其余为低电平(因为0x03的二进制只有最低的两位是1); `0x0F`对应的便是PB0-PB15全高.
 
-## 属于你的WritePin()
+::: tip 如何理解寄存器?
+这里多说一下单片机中的寄存器 (Register) 概念. 外设中的寄存器大概可以用这样的抽象模型理解:
+- 它是一种存储器, 可以存储一定位数的二进制数据. 例如STM32中使用的都是32位寄存器.
+- 寄存器有一个**地址**, 我们可以用代码读写这些寄存器, 读写的方式就是使用这些地址.(STM32使用32位地址)
+:::
+:::tip 读写地址
+C语言中读写地址的方式很简单, 就是通过我们一直强调的**指针**. 这里我们以读写`0x4000` 地址(我随便编的地址) 的寄存器为例.
 
-说到这里, 让我们做个有趣的任务: 实现属于自己的`WritePin()`吧.
-请按照之前的开发板配置方法建立新工程, 此时三个GPIO灯的模式已经被配好(如果你对配置过程感兴趣, 可以RTFM看看GPIO端口配置寄存器相关的内容). 在这里我们只需要通过手操寄存器来实现单纯的点灯操作就可以了.
+```C
+#define BASE_ADDR 0x4000
+#define PBASE ((uint32_t *)BASE_ADDR) // Convert address to a uint32 pointer
 
-寄存器在哪里? 很快你便碰到了第一个问题. 之前我们说过, 外设即访存, 那直接用指针写一堆数据不就行了嘛 --- 不过我们连相关寄存器的地址和用处都不知道, 那怎么办呢?
+volatile uint32_t* base_reg = PBASE;
+/* Read and Write to BASE REG */
+uint32_t read_data = *base_reg; // read register
+*base_reg = write_data; // write register
+```
+:::
+
+:::warning volatile关键字
+在刚才的代码中出现了一个新东西 - `volatile`关键字. 为什么需要这个关键字?
+
+本段的文章链接中已经谈论了这个问题. 请在继续下面的内容之前搞懂为什么要使用`volatile`.
+:::
+
+## 属于你的`WritePin()`
+
+在最后, 让我们做个有趣的任务: 实现属于自己的`WritePin()`吧.
+
+请按照之前的开发板配置方法建立新工程, 此时三个GPIO灯的模式已经被配好(如果你对配置过程感兴趣, 可以RTFM看看GPIO端口配置寄存器相关的内容). 
+
+在这里我们只需要通过手操寄存器来实现单纯的点灯操作就可以了.
+
+### 寄存器的地址
+
+寄存器在哪里? 很快你便碰到了第一个问题. "外设即访存", 想要通过寄存器控制GPIO, 我们总得有个地址吧. 
 
 别忘了, 我们之前已经阅读过Reference Manual了, 这个问题的答案也同样可以在手册中找到.
 
-寄存器的定义 GPIO相关寄存器种类繁多.
-不过Cubemx已经帮我们做好了初始化的工作,
-我们只需要关注和输出电平控制有关的寄存器定义就可以了.
+### 寄存器的定义
+
+GPIO相关寄存器种类繁多, 有的控制工作模式, 有的负责输入输出电平. 不过Cubemx已经帮我们做好了初始化的工作, 为了实现`WritePin()`, 我们只需要关注和输出电平控制有关的寄存器定义就可以了.
 
 因此你阅读了手册目录, 发现目前需要关注的只有**GPIO 端口输出数据寄存器
-(GPIOx\_ODR) (x = A\...H)**和**GPIO 端口置1/复位寄存器 (GPIOx\_BSRR) (x
-= A\...H)**两个寄存器 (其他寄存器都是做什么用的呢?).
+`GPIOx_ODR`** (x = A\...H)
+和
+**GPIO 端口置1/复位寄存器 `GPIOx_BSRR`** (x
+= A..H)两个寄存器 (其他寄存器都是做什么用的呢?).
 
 其中, ODR寄存器可以进行读写,
 直接设置GPIOx的每一位引脚的输出电平(ODR中只有低16位有作用,
 对应着一个GPIO端口上的16个引脚); BSRR寄存器则为只写, 在写BSRR时,
 相应位对应的GPIO引脚输出直接进行置位/复位.
 
-阅读手册中ODR和BSRR寄存器的描述, 理解这两个寄存器中每一位的功能定义.
+:::tip 为什么需要ODR和BSRR两个寄存器控制输出电平?
+:::
 
+:::tip 必做题: 阅读手册
+阅读手册中ODR和BSRR寄存器的描述, 理解这两个寄存器中每一位的功能定义.
+:::
+
+:::info 奇怪的只写BSRR
 BSRR的只写功能与我们惯常情况下所理解的\"访存(读写内存)\"有所不同(如果读BSRR,
-只会获得0x0的值). 可以这么理解, [访存是一种对外设的抽象]{.underline},
-在读写外设的场景下, 它不仅是单纯的\"读写内存\",
-而更像是对外设功能的一种抽象描述.
+只会获得0x0的值). 难道访存, 读写寄存器不就应该像是读写变量一样吗?
+
+可以这么理解, **[访存是一种对外设的抽象]**, 在读写外设的场景下, 它不仅是单纯的\"读写内存\", 而更像是对外设功能的一种抽象描述. 在这里, BSRR是 "直接设定某个引脚为高电平(SET)或低电平(RESET)", 对它而言有意义的操作只有"写"而不是"读".
+:::
 
 寄存器地址在哪里? 开发板上的LED都连接在GPIOB端口.
 所以我们只需要找GPIOB\_ODR和GPIOB\_BSRR的地址就可以了.
 
+:::tip 地址 = 基地址(BASE) + 偏移量(OFFSET)
 首先我们需要找到GPIOB的**基地址**:
-所有GPIOB的相关寄存器地址都会在这个基础上加上一个偏移量得到.
+所有GPIOB的相关寄存器地址都会在这个基础上**加上一个偏移量得到**.
 偏移量在寄存器的功能说明中已经给出.
+:::
 
 在手册的第二章2.2存储器组织架构一节, 你可以找到GPIOB的地址范围; 同时,
 你也可以看到各种其他内存段的定义和声明, 有兴趣的话可以翻一翻里面有什么.
+
 这里也有一些令人费解的新名词: AHB, APB等等, 它们都是总线的类型,
-区别在于性能和功耗.
+区别在于性能和功耗. AHB是高速的总线, APB则是低速的外设总线. 我们的GPIO便是挂载于APB总线上的.
 
 相信到这里, 你已经差不多理解了\"外设即访存\"究竟是什么意思.
 
-#### 实现
+### 实现
 
 接下来就来实现手操寄存器点灯的功能吧.
 
-    #define GPIOB_BASE 0x ? ? ? ? ? ? ? ?         // To be implemented...
-    #define GPIOx_ODR_OFFSET 0x ? ? ? ? ? ? ? ? ? // To be implemented...
-    #define GET_ADDR(base, offset) (base + offset)
-    #define GPIOB_REG(reg) volatile (uint32_t *)(GET_ADDR(GPIOB_BASE, GPIOx_##reg##_OFFSET))
+```C
+#define GPIOB_BASE 0x????????        // To be implemented...
+#define GPIOx_ODR_OFFSET 0x????????? // To be implemented...
+#define GET_ADDR(base, offset) (base + offset)
+#define GPIOB_REG(reg) volatile (uint32_t *)(GET_ADDR(GPIOB_BASE, GPIOx_##reg##_OFFSET))
 
-    /**
-     * @brief GPIOB的PBn引脚置位
-     */
-    void gpiob_set(uint8_t n) {
-      // To be implemented...
-    }
-    /**
-     * @brief GPIOB的PBn引脚复位
-     */
-    void gpiob_reset(uint8_t n) {
-      // To be implemented...
-    }
-    /**
-     * @brief GPIOB的PBn引脚写电平, 如果val==0则复位, 否则置位
-     */
-    void gpiob_write(uint8_t n, uint8_t val) {
-      // To be implemented...
-    }
+/**
+ * @brief GPIOB的PBn引脚置位
+ */
+void gpiob_set(uint8_t n) {
+  // To be implemented...
+}
+/**
+ * @brief GPIOB的PBn引脚复位
+ */
+void gpiob_reset(uint8_t n) {
+  // To be implemented...
+}
+/**
+ * @brief GPIOB的PBn引脚写电平, 如果val==0则复位, 否则置位
+ */
+void gpiob_write(uint8_t n, uint8_t val) {
+  // To be implemented...
+}
+```
 
 这里提一下位操作的方法: 如果想把某个数据的某一个bit置为0, 可以像这样做:
-
-        uint8_t target;
-        // 将target的第n位设置为0
-        target = (~(1 << n)) & target;
+```C
+uint8_t target;
+// 将target的第n位设置为0
+target = (~(1 << n)) & target;
+```
 
 也就是说, 生成一个除了第n个bit以外都是1的数,
 然后将它和target进行AND操作, 那么仅有的那个0就会将target的对应位设置为0.
@@ -392,4 +457,13 @@ BSRR的只写功能与我们惯常情况下所理解的\"访存(读写内存)\"�
 RTFSC (2)
 ---------
 
-读一读HAL库的WritePin()和相关源码, 试着理解一下它是怎么实现的吧.
+:::tip RTFSC(2)
+读一读HAL库的`WritePin()`和相关源码, 尝试理解一下它是怎么实现的.
+:::
+
+## 修改记录
+::: info 本章修改记录
+2024/2 完成编写. (顾雨杭)
+
+2024/3 网页适配 (顾雨杭)
+:::
