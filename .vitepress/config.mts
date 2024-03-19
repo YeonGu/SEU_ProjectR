@@ -16,17 +16,22 @@ export default defineConfig({
 
 		sidebar: [
 			{
-				text: "序: 在世界诞生之前",
-				link: "/embedded/0"
+				text: "嵌入式培训讲义",
+				items: [
+					{
+						text: "序: 在世界诞生之前",
+						link: "/embedded/0"
+					},
+					{
+						text: "准备工作与相关注意事项",
+						link: "/embedded/1"
+					},
+					{
+						text: "实验一 点灯工程师",
+						link: "/embedded/2GPIO"
+					},]
 			},
-			{
-				text: "准备工作与相关注意事项",
-				link: "/embedded/1"
-			},
-			{
-				text: "实验一 点灯工程师",
-				link: "/embedded/2GPIO"
-			},
+			{ text: "导航页: 竞赛资源分享", link: "/matches/index" },
 
 		],
 
