@@ -29,7 +29,16 @@ export default defineConfig({
 					{
 						text: "实验一 点灯工程师",
 						link: "/embedded/2GPIO"
-					},]
+					},
+					{
+						text: "实验二 UART串口通讯",
+						link: "/embedded/3UART"
+					},
+					{
+						text: "实验三 中断",
+						link: "/embedded/4INTR"
+					},
+				]
 			},
 			{ text: "导航页: 竞赛资源分享", link: "/matches/index" },
 
