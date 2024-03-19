@@ -4,7 +4,7 @@ import { defineConfig } from 'vitepress'
 export default defineConfig({
 	title: "SEU-Project R",
 	description: "东南大学电子科协嵌入式培训",
-	base: "/SEU_ProjectR/",
+	base: "/",
 	cleanUrls: true,
 	srcDir: "docs",
 	themeConfig: {
