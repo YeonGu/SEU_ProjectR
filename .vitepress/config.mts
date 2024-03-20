@@ -38,6 +38,10 @@ export default defineConfig({
 						text: "实验三 中断",
 						link: "/embedded/4INTR"
 					},
+					{
+						text: "基础篇最终话! 随心操控的小灯",
+						link: "/embedded/5EX1"
+					},
 				]
 			},
 			{ text: "导航页: 竞赛资源分享", link: "/matches/index" },
