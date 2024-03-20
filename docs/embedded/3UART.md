@@ -1,11 +1,14 @@
-UART串口通讯
-============
+---
+title: UART串口通讯
+lang: zh-CN
+---
+
+# 实验二 UART串口通讯
 
 在上一章,我们学会了如何初始化MCU的GPIO,利用库函数或寄存器修改特定GPIO引脚的输出电平,从而实现LED小灯的点亮与熄灭.
 在本章的内容中,我们将更进一步,利用stm32的uart串口通信模块,实现stm32开发板与上位机(你的电脑)之间的通信.
 
-知识准备
---------
+## 知识准备
 
 ### 什么是通讯协议？
 
@@ -37,8 +40,7 @@ RX(接收)线接收数据.UART
 
 "usart"与"uart"有什么不同? 多出来的"s"表示什么?
 
-放手去做吧!
------------
+## 放手去做吧!
 
 ### 创建工程＆代码小练
 
@@ -52,8 +54,7 @@ RX(接收)线接收数据.UART
 通过查阅开发板原理图,我们可以看到,usart3的RX引脚为PD8,TX引脚为PD9.它们被连接到了STLINK接口(也就是你连着usb线用来烧录程序的地方).
 因此,在本项目中选择usart3进行初始化,就可以很方便地利用usb串行总线与你的电脑(上位机)进行数据传输.
 
-重定向printf函数
-----------------
+## 重定向printf函数
 
 ### 使用printf函数
 
@@ -68,31 +69,31 @@ RX(接收)线接收数据.UART
         #include "stdio.h" 
 
 在main函数上方,添加如下语段,完成对printf函数的重定向.
-
-        #ifdef __GNUC__ 
-    /* With GCC, small printf (option LD Linker->Libraries->Small printf 
-       set to 'Yes') calls __io_putchar() */ 
-    #define PUTCHAR_PROTOTYPE int __io_putchar(int ch) 
-    #else 
-    #define PUTCHAR_PROTOTYPE int fputc(int ch, FILE *f) 
-    #endif /* __GNUC__ */ 
-     
-    PUTCHAR_PROTOTYPE 
-    { 
-      /* Place your implementation of fputc here */ 
-      /* e.g. write a character to the USART3 and Loop until the end of transmission */ 
-      HAL_UART_Transmit(&huart3, (uint8_t *)&ch, 1, 0xFFFF); 
-     
-      return ch; 
-    };
-
+```C
+#ifdef __GNUC__ 
+/* With GCC, small printf (option LD Linker->Libraries->Small printf 
+   set to 'Yes') calls __io_putchar() */ 
+#define PUTCHAR_PROTOTYPE int __io_putchar(int ch) 
+#else 
+#define PUTCHAR_PROTOTYPE int fputc(int ch, FILE *f) 
+#endif /* __GNUC__ */ 
+ 
+PUTCHAR_PROTOTYPE 
+{ 
+  /* Place your implementation of fputc here */ 
+  /* e.g. write a character to the USART3 and Loop until the end of transmission */ 
+  HAL_UART_Transmit(&huart3, (uint8_t *)&ch, 1, 0xFFFF); 
+ 
+  return ch; 
+};
+```
 将在main函数中使用的 `HAL_UART_Transmit_IT`
 全部替换为printf函数,格式如下
-
-        printf("your_string\r\n");
-        int a = 114514;
-        printf("a is %d\r\n", a);
-
+```c
+printf("your_string\r\n");
+int a = 114514;
+printf("a is %d\r\n", a);
+```
 将程序重新编译后导入到开发板中,观察程序能否正常运行.
 
 ### 发生了什么?
@@ -101,21 +102,21 @@ C语言标准库中的printf函数通常默认将输出发送到控制台或终�
 并不一定存在控制台或终端设备.这样就无法直接使用printf函数进行调试和输出信息.
 
 在重定向printf函数的代码中:
-
-        /* With GCC, small printf (option LD Linker->Libraries->Small printf 
-        set to 'Yes') calls __io_putchar() */
-
-通过宏定义,根据是否使用\|GCC\|编译器,选择使用不同的输出函数.
-
-        PUTCHAR_PROTOTYPE 
-    { 
-      /* Place your implementation of fputc here */ 
-      /* e.g. write a character to the USART3 and Loop until the end of transmission */ 
-      HAL_UART_Transmit(&huart3, (uint8_t *)&ch, 1, 0xFFFF); 
-     
-      return ch; 
-    }; 
-
+```C
+/* With GCC, small printf (option LD Linker->Libraries->Small printf 
+set to 'Yes') calls __io_putchar() */
+```
+通过宏定义,根据是否使用`GCC`编译器,选择使用不同的输出函数.
+```C
+PUTCHAR_PROTOTYPE 
+{ 
+    /* Place your implementation of fputc here */ 
+    /* e.g. write a character to the USART3 and Loop until the end of transmission */ 
+    HAL_UART_Transmit(&huart3, (uint8_t *)&ch, 1, 0xFFFF); 
+ 
+    return ch; 
+}; 
+```
 在 `PUTCHAR_PROTOTYPE` 函数中, 实现了输出函数的具体功能. 在这段代码中,
 它的作用是将一个字符发送到USART3串口(也就是我们之前选择的串口).
 
@@ -124,15 +125,16 @@ C语言标准库中的printf函数通常默认将输出发送到控制台或终�
 
 最后,通过`return`语句, `PUTCHAR_PROTOTYPE`函数返回发送的字符。
 
-### 为什么要重定向printf函数?
+### 为什么要重定向`printf()`函数?
 
-RTFSC (3)
----------
+## RTFSC (3)
 
-读一读HAL库的 `HAL_UART_Receive_IT`和
+阅读HAL库的 `HAL_UART_Receive_IT`和
 `HAL_UART_Transmit_IT`函数的相关源码,利用互联网查阅资料,尝试理解一下它们是怎么实现的.
 
-修改历史
---------
 
-2024/3 完成本章编写. (王皓瑞)
+## 修改记录
+::: info 本章修改记录
+- 2024/3 完成本章编写. (王皓瑞)
+- 2024/3 网页适配 (王皓瑞, 顾雨杭)
+:::
