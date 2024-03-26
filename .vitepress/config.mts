@@ -42,6 +42,10 @@ export default defineConfig({
 						text: "基础篇最终话! 随心操控的小灯",
 						link: "/embedded/5EX1"
 					},
+					{
+						text: "连接世界的总线",
+						link: "/embedded/6IIC"
+					},
 				]
 			},
 			{ text: "导航页: 竞赛资源分享", link: "/matches/index" },
