@@ -49,7 +49,7 @@ export default defineConfig({
 				]
 			},
 			{ text: "导航页: 竞赛资源分享", link: "/matches/index" },
-
+			{ text: "vscode", link: "/old/mdk6" },
 		],
 
 		socialLinks: [
