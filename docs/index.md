@@ -12,7 +12,7 @@ hero:
   actions:
     - theme: brand
       text: 嵌入式开发培训讲义
-      link: /embedded/0
+      link: /embedded/1introduction
     - theme: alt
       text: 相关链接与学习资源
       link: /relative-links

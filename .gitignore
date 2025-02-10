@@ -1,7 +1,7 @@
 .vitepress/cache/*
 node_modules
 .obsidian/*.json
-
+.vscode
 
 # for latex buffers
 *.aux

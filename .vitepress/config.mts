@@ -19,32 +19,32 @@ export default defineConfig({
 				text: "嵌入式培训讲义",
 				items: [
 					{
-						text: "序: 在世界诞生之前",
-						link: "/embedded/0"
+						text: "第一章 引言",
+						link: "/embedded/1introduction"
 					},
 					{
-						text: "准备工作与相关注意事项",
-						link: "/embedded/1"
+						text: "第二章 旅程开始之前: 准备工作与相关注意事项",
+						link: "/embedded/2envi"
 					},
 					{
-						text: "实验一 点灯工程师",
-						link: "/embedded/2GPIO"
+						text: "第三章 GPIO-梦开始的地方",
+						link: "/embedded/3GPIO"
 					},
 					{
-						text: "实验二 UART串口通讯",
-						link: "/embedded/3UART"
+						text: "第四章 信息邮递员-UART及其应用",
+						link: "/embedded/4uart"
 					},
 					{
-						text: "实验三 中断",
-						link: "/embedded/4INTR"
+						text: "第五章 穿越时空的旅程-中断及其应用",
+						link: "/embedded/5interupt"
 					},
 					{
-						text: "基础篇最终话! 随心操控的小灯",
-						link: "/embedded/5EX1"
+						text: "第六章 时间守护者-定时器及其应用",
+						link: "/embedded/6timer"
 					},
 					{
-						text: "连接世界的总线",
-						link: "/embedded/6IIC"
+						text: "第七章 将大局逆转吧！-综合练习",
+						link: "/embedded/7finalexe"
 					},
 				]
 			},
