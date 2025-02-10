@@ -68,7 +68,7 @@ STM32CubeMX 在6.5版本之后无法生成CLion所需要的SW4STM32类型项目,
 
 ### \*配置VSCode作为开发环境
 
-截止目前, 用VSCode配合MDK6的使用体验已经非常不错, 尤其是界面比起Keil美观了不是一星半点, 学起来都更有动力一些(<del>尽管我觉得就是ARM懒得设计好看的IDE, 直接写了个VSCode插件摆烂</del>). 关于在Windows和Ubuntu两种系统上的配置方法, 你都可以在[这里](./mdk6.md)找到.
+截止目前, 用VSCode配合MDK6的使用体验已经非常不错, 尤其是界面比起Keil美观了不是一星半点, 学起来都更有动力一些(<del>尽管我觉得就是ARM懒得设计好看的IDE, 直接写了个VSCode插件摆烂</del>). 关于在Windows和Ubuntu两种系统上的配置方法, 你都可以在[这里](../old/mdk6.md)找到.
 
 ## 熟悉全新的世界
 
