@@ -1,11 +1,6 @@
----
-title: 穿越时空的旅程-中断及其应用
-lang: zh-CN
----
-
 # 第五章 穿越时空的旅程-中断及其应用
 
-## 一、正片开始: 中断
+## 一．正片开始: 中断
 
 ​    在现实生活中，当我们在执行一个主线任务（比方说学习），总会有这样或那样的事情出现打断我们的主线任务（比方说学生工作，被喊去打游戏等等），迫使我们暂停我们的主线任务，去执行其他的任务。在执行任务时我们要考虑其他任务执行的先后顺序，并且在执行完其他任务之后我们要回归主线任务。单片机的中断原理也是如此。中断就是单片机正在执行程序时，由于内部或外部事件的触发，打断当前程序，转而去处理这一事件，当处理完成后再回到原来被打断的地方继续执行原程序的过程。
 
@@ -148,7 +143,7 @@ NVIC的主要作用：
 
 6.`void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)`：用于处理 UART（通用异步收发传输器）接收完成回调的函数。当使用 HAL 库的 UART 接收函数（如` HAL_UART_Receive_IT`以中断方式接收数据），并且指定数量的数据接收完成后，HAL 库会自动调用`HAL_UART_RxCpltCallback`函数。用户可以在这个回调函数中编写自己的代码来处理接收到的数据，比如对数据进行解析、存储或者触发其他操作。参数是指向`UART_HandleTypeDef`结构体的指针类型。
 
-## 三、 实验1-古代掌管点灯的中断之神
+## 三、 实验1-古代掌管点灯的神
 
 ### 实验目的
 
@@ -168,23 +163,29 @@ NVIC的主要作用：
 首先打开 STM32CubeIDE 工具，新建工程,按照下图步骤选择我们的板子NUCLEO-F413ZH，然后点击下一步。
 
 ![](./images/5_8.png)
-![](./images/5_9.png)
 
 对我们的工程起一个名字，这里我就以"TEST1"命名，然后点击finish
 
-![](./images/5_10.png)
+![](./images/5_9.png)
 
 此时若界面蹦出来询问我们是否需要给外设初始模式，我们选择yes
+
+
+
+
 
 **第二步**
 我们在图形化界面中打开GPIO，找到PC13，将其输入模式改为上升沿触发的外部中断模式（即External Interrupt Mode with Rising edge trigger detection）。此时根据GPIO原理图，按键在未按下时为低电平，按下时为高电平(附图一)
 
-![](./images/5_11.png)
+![](./images/5_10.png)
+
+
 
 **第三步**
 接着打开NVIC，在其中选择EXTI line[15:10]interrupts将其勾选为Enabled状态，即可使能外部中断，完成初始化。如需配置其他GPIO，流程与上述相似。（附图二）
 
-![](./images/5_12.png)
+![](./images/5_11.png)
+
 
 ### 主程序代码 
 
@@ -223,40 +224,42 @@ NVIC的主要作用：
 
 **第一步 配置串口**
 
-在 "Pinout & Configuration" 视图中，点击 "Connectivity" -> "USART2"。
+在 "Pinout & Configuration" 视图中，点击 "Connectivity" -> "USART3"。
 将 "Mode" 设置为 "Asynchronous"。
-在 "NVIC Settings" 选项卡中，勾选 "USART2 global interrupt" 使能串口中断。
+在 "NVIC Settings" 选项卡中，勾选 "USART3 global interrupt" 使能串口中断。
 
-![](./images/5_13.png)
+![](./images/5_12.png)
 
 **第二步 配置 GPIO**
 
 在 "Pinout & Configuration" 视图中，点击 "System Core" -> "GPIO"。
-选择 LED 对应的 GPIO 引脚（本实验选择 PA5），将其设置为 "Output Push Pull"。
+选择 LD1对应的 GPIO 引脚（本实验选择 PB0），将其设置为 "Output Push Pull"。
+
+![](./images/5_13.png)
 
 ### 编写用户代码
-
 在 "Core/Src/main.c" 文件中，找到 `/* USER CODE BEGIN PV */` 和 `/* USER CODE END PV */` 之间的部分，添加以下变量：
 ```c
-        uint8_t rx_data;//该变量用于存储通过串口接收到的大小为1字节的数据
+        uint8_t rx_data[1];//该变量用于存储通过串口接收到的大小为1字节的数据
 ```
 找到 `/* USER CODE BEGIN 0 */` 和 `/* USER CODE END 0 */` 之间的部分，添加以下串口中断回调函数：
 ```
-        void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)//该函数在接收到数据后开始调用串口中断回调函数
-        {
-          if (huart->Instance == USART2)
-          {
-            if (rx_data == 'A') // 如果接收到字符 'A'
-            {
-              HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_5); // 翻转 LED 状态
-            }
-            HAL_UART_Receive_IT(&huart2, &rx_data, 1); // 重新开启串口接收中断
-          }
-        }
+ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)//该函数在接收到数据后开始调用串口中断回调函数
+       {
+	       HAL_UART_Transmit_IT(&huart3, (uint8_t *)rx_data, 1);
+
+
+           if (rx_data[0] == 'A') // 如果接收到字符 'A'
+           {
+             HAL_GPIO_TogglePin(LD1_GPIO_Port, LD1_Pin); // 翻转 LED 状态
+           }
+           HAL_UART_Receive_IT(&huart3, (uint8_t *)rx_data, 1); // 重新开启串口接收中断
+
+       }
 ```
 在 /* USER CODE BEGIN 2 */` 和 `/* USER CODE END 2 */` 之间的部分，添加以下代码开启串口接收中断：
 ```
-        HAL_UART_Receive_IT(&huart2, &rx_data, 1);
+        HAL_UART_Receive_IT(&huart3, (uint8_t *)rx_data, 1);
 ```
 
 ### 实验结果
@@ -267,7 +270,6 @@ NVIC的主要作用：
 尝试发送其他字符或数字，此时LED均无反应。
 
 ## 五、 看，外部中断大放光彩！
-
 实际中外部中断广泛地运用在**键盘、遥控等外部设备和单片机的交互**中（其他类型中断的应用往往与该外设相关，此处不再赘述）。如图（a）所示为一种常用的 4X4 薄膜*键盘*，在实际的系统中，需要用户输入数据或者设置模式等操作往往需要键盘，该键盘的 8 根信号线分别对应 4行和 4 列，其原理图读者可以自行上网查询。开发者可以将行线设置为 EXTI 模式，列线设置为高电平输出，当某键按下时产生该行线上升沿，触发中断，执行相关操作。图 （b）为一种*红外遥控器*，用户可以借助其实现远程控制系统的功能，开发者可以设置红外接收器的一个引脚EXTI 模式，当红外接收器接收到遥控器发出的信号时，该引脚电平发生变化，触发中断，在中断程序中解析红外编码，再实现相应操作。图 （c）为一种*触摸屏*，通过一个引脚设置为EXTI 模式，当用户触摸时该引脚产生一个低电平，触发中断，在中断函数中获取触摸点坐标并且进行后续操作。感兴趣的读者可以上网更多资料了解。当然，以上模块可能不仅有外部中断种方式实现，事实上很多模块都有多种驱动方式，读者可以在开发中使用不同方式感受不同外设的优缺点。
 
 ![](./images/5_14.png)
@@ -282,8 +284,11 @@ NVIC的主要作用：
    4. 发送其他字符时两灯状态不变
 2. 若要求改为发送字符串“one”LD1 亮，“two”LD2 亮，“off”两灯熄灭，代码该如何修改。
 
-::: info 本章修改记录 
 
-2025/2 完成编写 (薛晨烨、吕允成、张凤茹)
+::: info 本章修改记录   
+2025/3 完成编写(薛晨烨、吕允成、张凤茹)
+2025/3 网页适配 (顾雨杭) 
+:::
 
-2025/3 网页适配 (顾雨杭) :::
+
+

@@ -241,14 +241,14 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
 
 ### 实验步骤
 
-1. 首先打开 STM32CubeMX 工具，新建工程。选择对应的NUCLEO-F413ZH开发板，起好工程名称。
+1. 首先打开 STM32CubeIDE 工具，新建工程。选择对应的NUCLEO-F413ZH开发板，起好工程名称。
 2. 我们对时钟树进行配置，配置的数据如图所示
 
    ![](./images/6_5.png)
 3. 完成所需配置。
    在定时器配置界面内配置 TIM2，并将时钟源修改为内部时钟。 
 
-![](../../QQ files/Downloads/定时器中断实验 (1)/images/6_13_1.png)
+![](./images/6_13_1.png)
 
 修改 TIM2 时钟参数：
 
@@ -263,20 +263,20 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
 保存并生成代码。
 
 1. 主程序代码
-   在 main 函数内 while 上方添加如下语句，开启定时器中断。
+   在USER CODE BEGIN 2处，添加如下语句添加如下语句，开启定时器中断。
 
 ```C
 HAL_TIM_Base_Start_IT(&htim2);
 ```
 
-定义所需变量。
+在USER CODE BEGIN PV处定义所需变量。
 
 ```c
 uint8_t light_state = 0; // 表示三种灯状态：0-红灯，1-绿灯，2-蓝灯
 uint8_t second_count = 0; // 秒计数器
 ```
 
-在 main 函数结束处下方添加如下语句。
+在USER CODE BEGIN 0或USER CODE BEGIN 4处添加如下语句。
 
 ```c
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
@@ -414,7 +414,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 然后对初始化设置进行保存，自动生成代码
 
 ### 主程序代码
-在USER CODE BEGIN 1处，添加如下语句：
+在USER CODE BEGIN PV处，添加如下语句：
 ```C
 uint16_t PWM_val=0;
 ```
@@ -635,5 +635,6 @@ void Display_Refresh_Init()
 
 2025/2 完成编写 (王博涵、王皓瑞、魏子皓、张魏文、秦一卿)
 
-2025/3 网页适配 (顾雨杭) :::
+2025/3 网页适配 (顾雨杭) 
+:::
 
